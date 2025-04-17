@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaba Jive</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #28a745, #1e7e34); /* Green theme */
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative; /* For absolute positioning of corner logos */
+        }
+        .page-wrapper {
+            flex: 1;
+            position: relative; /* For absolute positioning of corner logos */
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Logo and text on left, nav on right */
+            padding: 30px 50px; /* Increased padding to avoid overlap */
+            background-color: #E8E5B5; /* Pale yellowish-green */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: relative; /* For top-right logo */
+        }
+        .header-content {
+            display: flex;
+            align-items: center; /* Align text and image vertically */
+            gap: 15px; /* Space between image and text */
+        }
+        .title-container {
+            display: flex;
+            align-items: center; /* Align title and tagline horizontally */
+            gap: 10px; /* Space between title and tagline */
+        }
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        h1 .big-j {
+            font-size: 48px;
+            color: #FFC107; /* Yellow for the Js */
+            margin-right: 5px; /* Space between the Js */
+        }
+        .tagline {
+            font-size: 18px; /* Half the size of the title */
+            color: #FF0000; /* Bright red for visibility */
+            font-style: italic;
+        }
+        .header-content img {
+            max-height: 60px; /* Logo size in header */
+        }
+        nav {
+            margin-right: 80px; /* Increased to avoid overlap with top-right logo */
+        }
+        nav span, nav a {
+            color: #28a745;
+            font-size: 16px;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #FFC107;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex: 1;
+        }
+        .content {
+            width: 65%; /* Adjusted to make space for the form */
+            padding: 20px;
+            background: #D4E4D2; /* Pale mint for content background */
+            border-radius: 10px;
+        }
+        .signup-form-container {
+            width: 25%; /* Smaller width for the form container */
+            background: linear-gradient(to bottom, #28a745, #1e7e34); /* Match the green gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align form to the top */
+        }
+        .signup-form {
+            width: 100%; /* Form takes full width of container */
+            padding: 10px; /* Reduced padding for compactness */
+            background-color: #DDE5DD; /* Light green-grey */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            border: 2px solid #A9CBA4; /* Soft lime border */
+        }
+        .signup-form h2 {
+            font-size: 16px; /* Smaller heading for compact form */
+            color: #28a745; /* Green heading */
+            margin: 0 0 8px;
+            font-weight: bold;
+        }
+        .signup-form input {
+            width: 100%;
+            margin: 4px 0; /* Reduced margin for compactness */
+            padding: 6px; /* Reduced padding for inputs */
+            border: 1px solid #A9CBA4; /* Soft lime border for inputs */
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 13px; /* Smaller font for inputs */
+            background-color: #D4E4D2; /* Pale mint input background */
+        }
+        .signup-form button, .signup-form .login-btn {
+            width: 100%;
+            padding: 6px; /* Reduced padding for buttons */
+            margin: 4px 0; /* Reduced margin for compactness */
+            border: none;
+            border-radius: 4px;
+            font-size: 13px; /* Smaller font for buttons */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .signup-form button {
+            background-color: #28a745; /* Green Sign Up button */
+            color: white;
+        }
+        .signup-form button:hover {
+            background-color: #1e7e34; /* Darker green on hover */
+        }
+        .signup-form .login-btn {
+            background-color: #FFC107; /* Yellow Log In button */
+            color: #333;
+        }
+        .signup-form .login-btn:hover {
+            background-color: #e0a800; /* Darker yellow on hover */
+        }
+        .content h2 {
+            color: #1e7e34; /* Darker green for headings */
+            font-size: 26px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .content p {
+            color: #333; /* Darker text for readability on pale mint background */
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .content ul {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        .content .muguka-image {
+            text-align: center;
+            margin: 20px auto;
+        }
+        .content .muguka-image img {
+            max-width: 300px; /* Reasonable size for the content area */
+            height: auto;
+            border-radius: 8px; /* Slight rounding for aesthetics */
+        }
+        /* Shop Section Styling */
+        .shop-section {
+            background: linear-gradient(to bottom, #4caf50, #388e3c); /* Softer green gradient */
+            padding: 30px 50px;
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
+        }
+        .shop-section h2 {
+            color: #2e7d32; /* Forest green heading */
+            font-size: 26px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .product-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 25px; /* Increased gap for larger products */
+        }
+        .product {
+            background: #C8E6C9; /* Pale green background */
+            border-radius: 10px;
+            padding: 20px; /* Increased padding */
+            width: 30%; /* Increased width for larger products */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid #ff9800; /* Orange border */
+        }
+        .product img {
+            width: 100%;
+            max-width: 200px;
+            min-height: 150px; /* Ensure consistent height */
+            object-fit: cover; /* Crop to fit without distortion */
+            margin-bottom: 10px;
+        }
+        .product h3 {
+            color: #2e7d32; /* Forest green heading */
+            font-size: 18px; /* Increased font size */
+            margin: 10px 0;
+        }
+        .product p {
+            color: #333;
+            font-size: 14px; /* Increased font size */
+            line-height: 1.5;
+            margin: 0 0 10px;
+        }
+        .product .price {
+            font-size: 16px; /* Increased font size */
+            font-weight: bold;
+            color: #ff9800; /* Orange price */
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #E8E5B5; /* Pale yellowish-green */
+            padding: 30px 50px; /* Increased padding to avoid overlap */
+            margin-top: 20px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            display: flex; /* Use flexbox to arrange sections */
+            justify-content: space-between; /* Space sections evenly */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            border-top: 2px solid #A9CBA4; /* Soft lime border */
+            position: relative; /* For bottom-left and bottom-right logos */
+        }
+        footer div {
+            flex: 1;
+            margin: 10px;
+            min-width: 200px; /* Ensure sections don’t get too narrow */
+        }
+        footer h3 {
+            color: #28a745;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        footer p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .copyright {
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+            color: #555;
+            font-size: 12px;
+        }
+        /* Corner Logos */
+        .corner-logo {
+            position: absolute;
+            max-height: 60px; /* Match the header logo size */
+            z-index: 1; /* Ensure logos are above other content */
+        }
+        .top-right {
+            top: 30px; /* Adjusted to avoid overlap */
+            right: 30px; /* Adjusted to avoid overlap */
+        }
+        .bottom-left {
+            bottom: 30px; /* Adjusted to avoid overlap */
+            left: 30px; /* Adjusted to avoid overlap */
+        }
+        .bottom-right {
+            bottom: 30px; /* Adjusted to avoid overlap */
+            right: 30px; /* Adjusted to avoid overlap */
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header>
+            <div class="header-content">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwysB0hLrCTTF0UFtZYOG_R1962M2S9vZ2Fg&s" alt="Jaba Jive Logo">
+                <div class="title-container">
+                    <h1><span class="big-j">J</span>aba <span class="big-j">J</span>ive</h1>
+                    <div class="tagline">Khat That Sparks Giggles!</div>
+                </div>
+            </div>
+            <nav>
+                <span>Shop</span>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact Us</a>
+            </nav>
+            <!-- Top-right corner logo -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwysB0hLrCTTF0UFtZYOG_R1962M2S9vZ2Fg&s" alt="Jaba Jive Top Right Logo" class="corner-logo top-right">
+        </header>
+        <div class="container">
+            <div class="content">
+                <h2>Discover Muguka at Jaba Jive</h2>
+                <p>
+                    Jaba Jive brings you the freshest muguka, a natural stimulant with vibrant green leaves and reddish shoots. Enjoy a burst of energy and fun with every chew!
+                </p>
+                <!-- First image above Benefits of Muguka -->
+                <div class="muguka-image">
+                    <img src="https://nation.africa/resource/image/4657010/portrait_ratio1x1/1600/1600/b3785c3a1b9b68bdddcb80d32886c4e/Ot/muguka.jpg" alt="Muguka Image">
+                </div>
+                <h2>Benefits of Muguka</h2>
+                <ul>
+                    <li><strong>Chatty McChatface:</strong> Turns you into a social star—perfect for chatting up your cat!</li>
+                    <li><strong>Zoom-Zoom Energy:</strong> A natural buzz to sprint through your day—or knots to the fridge!</li>
+                    <li><strong>Giggle Generator:</strong> Chew and chuckle—muguka makes you your own comedian!</li>
+                </ul>
+                <!-- New image after Benefits of Muguka -->
+                <div class="muguka-image">
+                    <img src="https://smartfarmerkenya.com/wp-content/uploads/2024/10/Miraa-farm-in-Marsabit-photo-by-Mwaniki-Joseph-AFA-455x250.jpeg" alt="Miraa Farm in Marsabit">
+                </div>
+            </div>
+            <div class="signup-form-container">
+                <div class="signup-form">
+                    <h2>Welcome to Jaba Jive!</h2>
+                    <form>
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email" required>
+                        <input type="password" placeholder="Password" required>
+                        <button type="submit">Sign Up</button>
+                        <button type="button" class="login-btn">Log In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Section Below Sign-Up Form -->
+        <div class="shop-section">
+            <h2>Our Muguka Products</h2>
+            <div class="product-grid">
+                <div class="product">
+                    <h3>Fresh Muguka Bundle (100g)</h3>
+                    <img src="https://nation.africa/resource/image/4657010/landscape_ratio3x2/1620/1080/3f91fabaf5cb5337db17f26f79ca004f/Js/muguka.jpg" alt="Fresh Muguka Bundle">
+                    <p>A 100-gram bundle of freshly harvested muguka leaves from Embu farmers. Known for its vibrant green leaves and reddish shoots, it offers a natural stimulant effect with energy and euphoria. Perfect for a refreshing chew to boost your day!</p>
+                    <div class="price">KES 50</div>
+                </div>
+                <div class="product">
+                    <h3>Muguka Seedlings (5-10 Months Old)</h3>
+                    <img src="https://scontent.fnbo18-1.fna.fbcdn.net/v/t39.30808-6/470085341_122167328018109849_6413246863248700491_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=_VPkQI1wfDAQ7kNvwHxzK2-&_nc_oc=AdkU8bJW36vsjoNiSwBBOBZWjIkpNq3zI1mAxcUsXFM6fX3FlVWPry2Ss_vH4iIvzm73rmGvmObBs0MLTVWuX6Ah&_nc_zt=23&_nc_ht=scontent.fnbo18-1.fna&_nc_gid=ud4GqyPAX3ywFWfYP73F9g&oh=00_AfFX6Kn2nUH5HDSlMYSZaN3L7nQURwdJA_6BmLBRpBOOjw&oe=6805B7D8" alt="Muguka Seedlings">
+                    <p>High-quality muguka seedlings, aged 5-10 months, ready for planting. These seedlings are fast-growing and thrive in warm environments with good water supply, making them ideal for small-scale farmers looking to cultivate their own muguka. Start your own muguka farm today!</p>
+                    <div class="price">KES 60 per seedling</div>
+                </div>
+                <div class="product">
+                    <h3>Muguka Energy Drink (250ml)</h3>
+                    <img src="https://nnmedia.nation.africa/uploads/2024/07/IMG_2126-1320x880.jpg" alt="Muguka Energy Drink">
+                    <p>A 250-milliliter can of muguka energy drink, developed using the stimulant properties of muguka leaves. This refreshing beverage offers a natural energy boost without the need to chew leaves, making it a convenient alternative. Perfect for those on the go, with a longer shelf life than fresh leaves.</p>
+                    <div class="price">KES 110</div>
+                </div>
+                <div class="product">
+                    <h3>Dried Muguka Powder (50g)</h3>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTie-CivvgDe5gumEnpwIDmMZ7HQaVpqjIxUA&s" alt="Dried Muguka Powder">
+                    <p>A 50-gram pack of finely ground dried muguka powder, perfect for mixing into drinks or using as a natural stimulant supplement. Sourced from premium muguka leaves, this powder retains the energizing properties of fresh muguka with a longer shelf life.</p>
+                    <div class="price">KES 90</div>
+                </div>
+                <div class="product">
+                    <h3>Muguka Energy Bars (Pack of 3)</h3>
+                    <img src="https://www.kenafricind.com/images/product/500/Muguka-Bubble-Gum_.jpg" alt="Muguka Energy Bars">
+                    <p>A pack of three muguka-infused energy bars, made with natural ingredients and the stimulating essence of muguka leaves. These bars provide a quick energy boost and are perfect for a snack on the go, offering the same benefits as fresh muguka in a tasty, portable form.</p>
+                    <div class="price">KES 150</div>
+                </div>
+                <div class="product">
+                    <h3>Muguka Wine (750ml)</h3>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:wght9GcSQbbTnryJ4hy-mtc5e-aNr8S1Lv4SqI6DGIQ&s" alt="Muguka Wine">
+                    <p>A 750-milliliter bottle of muguka wine, crafted from the essence of muguka leaves. This unique beverage offers a mild stimulant effect with a smooth, refreshing taste, perfect for social gatherings or relaxation. A longer-lasting alternative to fresh muguka.</p>
+                    <div class="price">KES 500</div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div>
+                <h3>About Us</h3>
+                <p>
+                    Jaba Jive is your premier online store for fresh muguka. We’re passionate about bringing you the best quality khat to energize your day with a smile!
+                </p>
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <p>Email: support@jabajive.com</p>
+                <p>Phone: +123-456-7890</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <p>Shop</p>
+                <p>Privacy Policy</p>
+                <p>Terms of Service</p>
+            </div>
+            <div class="copyright">
+                <p>© 2025 Jaba Jive. All rights reserved.</p>
+            </div>
+            <!-- Bottom-left and bottom-right corner logos -->
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwysB0hLrCTTF0UFtZYOG_R1962M2S9vZ2Fg&s" alt="Jaba Jive Bottom Left Logo" class="corner-logo bottom-left">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwysB0hLrCTTF0UFtZYOG_R1962M2S9vZ2Fg&s" alt="Jaba Jive Bottom Right Logo" class="corner-logo bottom-right">
+        </footer>
+    </div>
+</body>
+</html>
